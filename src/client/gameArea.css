@@ -1,0 +1,162 @@
+body {
+    margin: 0;
+    background-color: black;
+}
+
+img {
+    user-select: none;
+}
+
+.positioned {
+    position: absolute;
+}
+
+.shadow {
+    box-shadow: 5px 5px 5px #666;
+    -webkit-box-shadow: 5px 5px 5px #666;
+}
+
+.small-shadow {
+    box-shadow: 2px 2px 2px #666;
+    -webkit-box-shadow: 2px 2px 2px #666;
+}
+
+.gray {
+    filter: grayscale(100%);
+    opacity: 0.5;
+}
+
+.player-name {
+    color: gray;
+    text-align: center;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.player-name.current-player {
+    color: orange;
+}
+
+.decrease-health {
+    background-image: url('/health/health-red.png');
+    background-size: cover;
+}
+
+.increase-health {
+    background-image: url('/health/health-green.png');
+    background-size: cover;
+}
+
+.chain {
+    background-image: url('/chain.png');
+    background-size: cover;
+}
+
+.game-label {
+    position: absolute;
+    color: white;
+    pointer-events: none;
+}
+
+.game-label2 {
+    position: absolute;
+    color: white;
+    pointer-events: none;
+}
+
+.my-area {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #2B1A15;
+}
+
+.help-panel {
+    position: relative;
+    top: 30vh;
+    width: 35vw;
+    height: 30vh;
+    background-color: white;
+    border: 2px solid black;
+    margin: 0 auto;
+    color: black;
+}
+
+.help-panel > img {
+    height: 100%;
+    float: left;
+    margin-right: 3px;
+}
+
+.help-panel > div {
+    padding: 20px;
+    height: calc(100% - 40px);
+    overflow: auto;
+}
+
+.help-panel > button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+}
+
+.selectable .item {
+    cursor: pointer;
+}
+
+.selectable .item:hover {
+    outline: 4px solid orange;
+}
+
+.selectable .item:active {
+    transform: scale(0.99);
+}
+
+.image-div.selectable {
+    cursor: pointer;
+}
+
+.image-div.selectable:hover {
+    outline: 4px solid orange;
+}
+
+.image-div.selectable:active {
+    transform: scale(0.99);
+}
+
+button {
+    font-size: 16px;
+    border-radius: 8px;
+    color: white;
+    user-select: none;
+}
+
+button.warn {
+    background-color: rgba(255, 186, 0, 1.0);
+}
+
+button.warn.selectable:hover {
+    background-color: rgba(255, 186, 0, 0.7);
+}
+
+button.bad {
+    background-color: rgba(255, 0, 0, 1.0);
+}
+
+button.bad.selectable:hover {
+    background-color: rgba(255, 0, 0, 0.6);
+}
+
+button.selectable {
+    cursor: pointer;
+}
+
+button.selectable:active {
+    transform: scale(0.99);
+}
+
+button.disabled {
+    background-color: gray;
+}

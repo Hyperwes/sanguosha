@@ -1,0 +1,17 @@
+.board {
+    position: relative;
+    width: 100vw;
+    max-width: calc(100vw - 250px);
+    margin: 0 auto;
+    /* slightly smaller to avoid scrollbar */
+    height: calc(100vh - 10px);
+    background-color: #ffebd0;
+    border: 3px solid #2B1A15;
+    text-align: left;
+}
+
+@media (min-width: 1650px) {
+    .board {
+        max-width: 1400px;
+    }
+}
