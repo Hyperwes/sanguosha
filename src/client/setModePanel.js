@@ -126,7 +126,7 @@ export default class SetModePanel extends React.Component {
 		if (character.name === 'Wu Guo Tai') {
             return this.renderButton(SetModePanel.HEAVENLY_ESSENCE_MODE);
         }
-        if (['Deng Ai', 'Zhou Tai', 'Xu Sheng', 'Yu Jin', 'Cheng Pu', 'Zhong Hui'].includes(character.name)) {
+        if (['Deng Ai', 'Zhou Tai', 'Xu Sheng', 'Yu Jin', 'Cheng Pu', 'Zhong Hui', 'Liu Feng'].includes(character.name)) {
             return this.renderButton(SetModePanel.CARD_ON_CHAR_MODE);
         }
 		if (['Li Ru', 'Yu Fan'].includes(character.name)) {
