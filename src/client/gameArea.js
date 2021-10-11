@@ -208,6 +208,11 @@ export default class GameArea extends React.Component {
                 moves.play(selectedIndex, player, 'Starvation');
                 this.setState({ mode: SetModePanel.DEFAULT_MODE });
             };
+		} else if (mode === SetModePanel.RECKLESS_ABANDON_MODE && selectedIndex !== undefined) {
+            onClick = () => {
+                moves.recklesslyAbandon(selectedIndex, player, 'Starvation');
+                this.setState({ mode: SetModePanel.DEFAULT_MODE });
+            };
         } else if (mode === SetModePanel.ALLIANCE_MODE) {
             if (selectedIndex === undefined) {
                 onClick = () => this.setState({ selectedIndex: player });
@@ -418,7 +423,7 @@ export default class GameArea extends React.Component {
         // Show the card backs
         hand.forEach(card => {
             let onClick = undefined;
-            if (mode === SetModePanel.DEFAULT_MODE || mode === SetModePanel.DISMANTLE_MODE || mode === SetModePanel.STEAL_MODE) {
+            if (mode === SetModePanel.DISMANTLE_MODE || mode === SetModePanel.STEAL_MODE) {
                 onClick = () => {
                     (mode === SetModePanel.DISMANTLE_MODE ? moves.dismantle : moves.steal)({
                         playerID: player,
@@ -624,7 +629,7 @@ export default class GameArea extends React.Component {
 
     getDiscardCards(middleCardsFound) {
         const { G, moves, width, height, scaledWidth, scaledHeight } = this.props;
-        const { mode } = this.state;
+        const { mode, selectedIndex } = this.state;
         const { discard, isFlipped } = G;
         const MAX_DISCARDS_SHOWN = 4;
         const numCardsShown = Math.min(discard.length, MAX_DISCARDS_SHOWN);
@@ -650,7 +655,9 @@ export default class GameArea extends React.Component {
                     moves.putCardOnDeck(discard.length - 1 - i)
                     this.setState({ mode: SetModePanel.DEFAULT_MODE });
                 };
-            } else if (mode === SetModePanel.HELP_MODE) {
+			} else if (mode === SetModePanel.RECKLESS_ABANDON_MODE && i < MAX_DISCARDS_SHOWN && selectedIndex === undefined) {
+				onClick = () => this.setState({ mode: SetModePanel.RECKLESS_ABANDON_MODE, selectedIndex: discard.length - 1 - i});
+			} else if (mode === SetModePanel.HELP_MODE) {
                 onClick = () => this.setState({ helpCard: { key: card.type, src: `./cards/${card.type}.jpg` } });
             }
             normalCards.push({
@@ -730,6 +737,7 @@ export default class GameArea extends React.Component {
             || mode === SetModePanel.GIVE_JUDGMENT_MODE
             || (mode === SetModePanel.COUNTRY_SCENE_MODE && selectedIndex !== undefined)
             || (mode === SetModePanel.BLOCKADE_MODE && selectedIndex !== undefined)
+			|| (mode === SetModePanel.RECKLESS_ABANDON_MODE && selectedIndex !== undefined)
 			|| (mode === SetModePanel.HEAVENLY_ESSENCE_MODE && selectedIndex !== undefined)
             || (mode === SetModePanel.ALLIANCE_MODE && selectedIndex === undefined)) {
             actionButton = {
@@ -834,7 +842,7 @@ export default class GameArea extends React.Component {
             }
         } else if (mode === SetModePanel.BLOCKADE_MODE && selectedIndex === undefined) {
             if (['CLUB', 'SPADE'].includes(card.suit) && (BASIC.includes(card.type) || EQUIPMENT[card.type])) {
-                return () => this.setState({ mode: SetModePanel.COUNTRY_SCENE_MODE, selectedIndex: index });
+                return () => this.setState({ mode: SetModePanel.BLOCKADE_MODE, selectedIndex: index });
             }
         } else if (mode === SetModePanel.CARD_ON_CHAR_MODE && this.stage() === 'play') {
             return () => {

@@ -10,7 +10,7 @@ const SERVER = process.env.REACT_APP_PROXY || document.location.toString().repla
 const NAME_KEY = 'name';
 const MATCH_INFO_KEY = 'matchInfo';
 const INPUT_NAME_ID = 'name-input';
-const EXPANSIONS = ['wind', 'fire', 'wood', 'hills', 'general1', 'general2', 'general3'];
+const EXPANSIONS = ['wind', 'fire', 'wood', 'hills', 'ge1', 'ge2', 'ge3', 'ge4'];
 
 const SanGuoShaClient = Client({
     game: SanGuoSha,

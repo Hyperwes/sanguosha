@@ -54,6 +54,27 @@ function play(G, ctx, index, targetPlayerID, forceCategory) {
     }
 }
 
+function recklesslyAbandon(G, ctx, index, targetPlayerID, forceCategory) {
+    const { discard, equipment, isFlipped } = G;
+    const { playerID } = ctx;
+    const [card] = discard.splice(index, 1);
+    if (card === undefined) {
+        return;
+    }
+    const category = forceCategory || EQUIPMENT[card.type];
+    if (!isFlipped[card.id] && category) {
+        if (targetPlayerID === undefined) {
+            targetPlayerID = playerID;
+        }
+        if (equipment[targetPlayerID][category]) {
+            discard(G, ctx, equipment[targetPlayerID][category]);
+        }
+        equipment[targetPlayerID][category] = card;
+    } else {
+        discard(G, ctx, card);
+    }
+}
+
 function characterPlaceFromHand(G, ctx, index, targetPlayerID, forceCategory) {
     const { hands, equipment, isFlipped, cardsOnChar } = G;
     const { playerID } = ctx;
@@ -503,6 +524,7 @@ export const SanGuoSha = {
                             characterPlaceFromDiscard,
 							characterPlaceFromOtherPlayer,
 							putCardOnDeck,
+							recklesslyAbandon,
                          },
                     },
                     discard: {

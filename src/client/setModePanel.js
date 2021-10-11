@@ -15,6 +15,7 @@ export default class SetModePanel extends React.Component {
     static GIVE_JUDGMENT_MODE = 'Give Judgment';
     static COUNTRY_SCENE_MODE = 'Country Scene';
     static BLOCKADE_MODE = 'Blockade';
+	static RECKLESS_ABANDON_MODE = 'Reckless Abandon';
     static ALLIANCE_MODE = 'Alliance';
 	static HEAVENLY_ESSENCE_MODE = 'Heavenly Essence';
     static CARD_ON_CHAR_MODE = "Place card on self";
@@ -120,6 +121,9 @@ export default class SetModePanel extends React.Component {
         if (character.name === 'Xu Huang') {
             return this.renderButton(SetModePanel.BLOCKADE_MODE);
         }
+		if (character.name === 'Han Hao & Shi Huan') {
+			return this.renderButton(SetModePanel.RECKLESS_ABANDON_MODE);
+		}
         if (character.name === 'Lu Su') {
             return this.renderButton(SetModePanel.ALLIANCE_MODE);
         }
