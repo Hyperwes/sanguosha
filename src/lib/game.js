@@ -11,8 +11,8 @@ function selectCharacter(G, ctx, index) {
     characterChoices[playerID] = undefined;
     characters[playerID] = character;
     let maxHealth = character.health;
-    if (numPlayers >= 4 && playOrder[startPlayerIndex] === playerID) {
-        // if >= 4 players, add 1 extra health for the King
+    if (numPlayers >= 5 && playOrder[startPlayerIndex] === playerID) {
+        // if >= 5 players, add 1 extra health for the King
         maxHealth++;
     }
     healths[playerID] = {
