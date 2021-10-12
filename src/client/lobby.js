@@ -206,15 +206,6 @@ export default class SanGuoShaLobby extends React.Component {
                     </button>
                 );
             } else {
-                buttons.push(
-                    <button
-                        key="watch"
-                        onClick={() => this.leaveMatch()
-                            .then(() => this.setState({ matchInfo: { matchID: matchID, playerID: '-1', }, inGame: true }))}
-                    >
-                        {'Watch'}
-                    </button>
-                );
             }
         } else {
             if (playerNames[0] === name && playerNames.length >= SanGuoSha.minPlayers) {
