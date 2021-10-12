@@ -75,14 +75,23 @@ function recklesslyAbandon(G, ctx, index, targetPlayerID, forceCategory) {
     }
 }
 
-function characterPlaceFromHand(G, ctx, index, targetPlayerID, forceCategory) {
-    const { hands, equipment, isFlipped, cardsOnChar } = G;
+function putCardOnDeckFromHand(G, ctx, index, targetPlayerID, forceCategory) {
+    const { deck, hands } = G;
     const { playerID } = ctx;
     const [card] = hands[playerID].splice(index, 1);
     if (card === undefined) {
         return;
     }
-    const category = forceCategory || EQUIPMENT[card.type];
+    deck.push(card);
+}
+
+function characterPlaceFromHand(G, ctx, index, targetPlayerID, forceCategory) {
+    const { hands, cardsOnChar } = G;
+    const { playerID } = ctx;
+    const [card] = hands[playerID].splice(index, 1);
+    if (card === undefined) {
+        return;
+    }
     cardsOnChar[playerID].push(card);
 }
 
@@ -244,8 +253,7 @@ function passLightning(G, ctx) {
 }
 
 function putCardOnDeck(G, ctx, index) {
-    const { deck, discard, hands } = G;
-    const { playerID } = ctx;
+    const { deck, discard } = G;
     const [card] = discard.splice(index, 1);
     deck.push(card);
 }
@@ -294,7 +302,7 @@ function alliance(G, _ctx, player1, player2) {
 }
 
 function switchEquipment(G, _ctx, player1, player2) {
-	const { equipment, hands } = G;
+	const { equipment } = G;
 	['Weapon', 'Shield', '+1', '-1'].forEach((category, i) => {
             const card = equipment[player1][category];
 			const card2 = equipment[player2][category];
@@ -524,6 +532,7 @@ export const SanGuoSha = {
                             characterPlaceFromDiscard,
 							characterPlaceFromOtherPlayer,
 							putCardOnDeck,
+							putCardOnDeckFromHand,
 							recklesslyAbandon,
                          },
                     },

@@ -188,7 +188,7 @@ export default function setup(ctx, setupData) {
     const allCharacters = CHARACTERS.filter(c => c.expansion === undefined || expansions.includes(c.expansion));
     const numCharacterChoices = 3 * (numPlayers + 1) <= allCharacters.length ? 3 : 2;
     const monarchChoices = random.Shuffle(allCharacters.filter(c => c.isMonarch));
-    const normalCharacters = random.Shuffle(allCharacters.filter(c => !monarchChoices.includes(c)));
+    const normalCharacters = random.Shuffle(allCharacters.filter(c => !monarchChoices.slice(0, numCharacterChoices).includes(c)));
     const characterChoices = Object.fromEntries(playOrder.map((player, i) =>
         [player, normalCharacters.slice(numCharacterChoices * i, numCharacterChoices * (i + 1))]));
     characterChoices[playOrder[startPlayerIndex]].push(...monarchChoices.slice(0, numCharacterChoices));

@@ -39,6 +39,7 @@ export default class SetModePanel extends React.Component {
                 {this.renderButton(SetModePanel.STEAL_MODE)}
                 {this.renderButton(SetModePanel.REVEAL_MODE)}
                 {this.renderButton(SetModePanel.FLIP_MODE)}
+				{this.renderButton(SetModePanel.CARD_ON_DECK_MODE)}
                 {this.renderSpecialModeButton()}
                 {this.renderButton(SetModePanel.HELP_MODE)}
                 {this.renderButton(SetModePanel.SHOW_HOTKEYS_MODE)}
@@ -133,9 +134,6 @@ export default class SetModePanel extends React.Component {
         if (['Deng Ai', 'Zhou Tai', 'Xu Sheng', 'Yu Jin', 'Cheng Pu', 'Zhong Hui', 'Liu Feng'].includes(character.name)) {
             return this.renderButton(SetModePanel.CARD_ON_CHAR_MODE);
         }
-		if (['Li Ru', 'Yu Fan'].includes(character.name)) {
-            return this.renderButton(SetModePanel.CARD_ON_DECK_MODE);
-        }
     }
 
     renderSpecialButton() {
@@ -175,9 +173,8 @@ export default class SetModePanel extends React.Component {
     }
 
     renderAwakeningButton() {
-        const { G, ctx, moves, playerID } = this.props;
-        const { characters, privateZone } = G;
-        const { currentPlayer } = ctx;
+        const { G, moves, playerID } = this.props;
+        const { characters } = G;
         const character = characters[playerID];
         if (character === undefined) {
             return;
@@ -234,6 +231,10 @@ export default class SetModePanel extends React.Component {
                         <tr>
                             <td>F</td>
                             <td>Flip your next selected card</td>
+                        </tr>
+						<tr>
+                            <td>P</td>
+                            <td>Put your next selected card on top of the deck</td>
                         </tr>
                         <tr>
                             <td>H</td>
@@ -324,6 +325,9 @@ export default class SetModePanel extends React.Component {
                 break;
             case "f":
                 setMode(SetModePanel.FLIP_MODE);
+                break;
+			case "p":
+                setMode(SetModePanel.CARD_ON_DECK_MODE);
                 break;
             case "h":
                 setMode(SetModePanel.HELP_MODE);

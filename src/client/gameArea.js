@@ -415,7 +415,7 @@ export default class GameArea extends React.Component {
 
     // Show card on character card, separate to hand
     addPlayerCard(playerArea, player, normalCards, nodes) {
-        const { G, moves, playerID, scaledWidth, scaledHeight } = this.props;
+        const { G, moves, scaledWidth, scaledHeight } = this.props;
         const { mode } = this.state;
         const { cardsOnChar } = G;
         const hand = cardsOnChar[player];
@@ -846,7 +846,12 @@ export default class GameArea extends React.Component {
             }
         } else if (mode === SetModePanel.CARD_ON_CHAR_MODE && this.stage() === 'play') {
             return () => {
-                moves.characterPlaceFromHand(index)
+                moves.characterPlaceFromHand(index);
+                this.setState({ mode: SetModePanel.DEFAULT_MODE });
+            };   
+        } else if (mode === SetModePanel.CARD_ON_DECK_MODE && this.stage() === 'play') {
+            return () => {
+                moves.putCardOnDeckFromHand(index);
                 this.setState({ mode: SetModePanel.DEFAULT_MODE });
             };   
         }
